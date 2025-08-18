@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OSS – Policies</title>
+  <meta name="color-scheme" content="dark light" />
+  <meta name="description" content="Official OSS (Open Submission Series) tournament policies: eligibility, conduct, formats, safety, media, refunds, and more." />
+  <style>
+    /* ===== CSS VARIABLES (Dark Theme) ===== */
+    :root{
+      --bg: #0c0d10;
+      --surface: #111218;
+      --surface-2: #171923;
+      --text: #e7e9ee;
+      --muted: #a1a6b3;
+      --accent: #e05024;
+      --accent-2: #fff68d;
+      --border: #1f2330;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --focus: 0 0 0 3px rgba(122,162,255,.35);
+      --radius: 0px; /* square look */
+      --container: 1100px;
+      --hero-image: url('https://i.imgur.com/Z3bqzqu.jpeg');
+    }
+    @media (prefers-color-scheme: light) {
+      :root{ --bg:#f7f8fa; --surface:#ffffff; --surface-2:#f3f5f9; --text:#0f1220; --muted:#4b5160; --border:#e7eaf2; --shadow:0 10px 25px rgba(0,0,0,.08); --focus:0 0 0 3px rgba(62,115,255,.25); }
+    }
+
+    /* ===== BASE ===== */
+    *,*::before,*::after{ box-sizing: border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
+    a{ color:var(--text); text-decoration:none; }
+    img{ max-width:100%; display:block; }
+    .container{ max-width:var(--container); margin-inline:auto; padding: 0 20px; }
+
+    /* ===== NAV (Section 1) ===== */
+    .topbar{ position:sticky; top:0; z-index:1000; background:var(--surface); border-bottom:1px solid var(--border); box-shadow: var(--shadow); }
+    .nav{ display:flex; align-items:center; justify-content:space-between; height:64px; gap:16px; }
+    .brand{ display:flex; align-items:center; gap:12px; }
+    .brand img{ width:36px; height:36px; border-radius: var(--radius); background:#000; box-shadow: var(--shadow); }
+    .brand span{ font-weight:600; letter-spacing:.2px; }
+
+    .nav-links{ position:relative; display:flex; gap:18px; align-items:center; transition: height .25s ease; }
+    .nav-link, .dropdown-toggle{ padding:8px 10px; border-radius: var(--radius); color:var(--muted); background:none; border:none; font:inherit; cursor:pointer; }
+    .nav-link:hover, .nav-link:focus,
+    .dropdown-toggle:hover, .dropdown-toggle:focus{ color:var(--text); outline:none; }
+    .nav-link::after, .dropdown-toggle::after{ content:""; display:block; height:2px; margin-top:6px; width:0; background:linear-gradient(90deg,var(--accent),var(--accent-2)); transition: width .25s ease; }
+    .nav-link:hover::after, .nav-link:focus-visible::after,
+    .dropdown-toggle:hover::after, .dropdown-toggle:focus-visible::after{ width:100%; }
+    .nav-link[aria-current="page"]{ color:var(--text); }
+
+    .burger{ display:none; background:transparent; border:1px solid var(--border); border-radius: var(--radius); width:40px; height:40px; align-items:center; justify-content:center; color:var(--text); }
+    .burger:focus-visible{ outline: none; box-shadow: var(--focus); }
+    .burger svg{ width:22px; height:22px; }
+
+    /* Dropdown */
+    .dropdown{ position:relative; }
+    .dropdown-toggle{ display:flex; align-items:center; gap:8px; }
+    .caret{ display:inline-block; width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-top:6px solid var(--muted); transition: transform .2s ease, border-top-color .2s ease; }
+    .dropdown[aria-expanded="true"] .caret{ transform: rotate(180deg); border-top-color: var(--text); }
+
+    .dropdown-menu{ position:absolute; right:0; top:calc(100% + 8px); background:var(--surface-2); border:1px solid var(--border); box-shadow: var(--shadow); border-radius: var(--radius); min-width: 220px; padding:6px; display:none; }
+    .dropdown-menu a{ display:block; padding:10px; border-radius: var(--radius); color:var(--text); }
+    .dropdown-menu a:hover, .dropdown-menu a:focus{ background: rgba(255,255,255,.04); outline:none; }
+
+    @media (hover:hover){ .dropdown:hover .dropdown-menu{ display:block; } }
+
+    /* Mobile layout */
+    @media (max-width: 820px){
+      .burger{ display:inline-flex; }
+      .nav-links{ position:absolute; left:0; right:0; top:64px; background:var(--surface); border-bottom:1px solid var(--border); flex-direction:column; align-items:flex-start; padding:12px 20px; height:0; overflow:hidden; }
+      .nav-links.open{ height:auto; }
+      .nav-link, .dropdown-toggle{ width:100%; text-align:left; padding:12px 6px; }
+      .dropdown-menu{ position:static; display:none; margin:2px 0 8px 0; width:100%; }
+      .dropdown.open .dropdown-menu{ display:block; }
+    }
+
+    /* ===== HERO (Section 2) ===== */
+    .hero{ position:relative; min-height:48vh; display:grid; place-items:center; isolation:isolate; background: #000; overflow:hidden; }
+    .hero::before{ content:""; position:absolute; inset:0; background-image: var(--hero-image); background-size: cover; background-position:center; filter: brightness(.45) saturate(.9); transform: scale(1.05); transition: transform 6s ease; z-index:-2; }
+    .hero::after{ content:""; position:absolute; inset:0; z-index:-1; background: radial-gradient(1200px 400px at 60% 10%, transparent 20%, rgba(0,0,0,.4) 55%, rgba(0,0,0,.75) 100%), linear-gradient(180deg, rgba(0,0,0,.3), rgba(0,0,0,.6)); }
+    .hero:hover::before{ transform: scale(1.1); }
+    .hero-inner{ text-align:center; padding:72px 20px; }
+    .eyebrow{ color:var(--muted); letter-spacing:.25em; text-transform:uppercase; font-size:12px; }
+    .hero h1{ margin:.35em 0 .6em; font-size: clamp(28px, 6vw, 56px); line-height:1.1; letter-spacing:.2px; }
+    .btn{ display:inline-block; padding:12px 18px; font-weight:600; background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#0b0e13; border:0; border-radius: var(--radius); box-shadow: var(--shadow); transform: translateZ(0); transition: transform .15s ease, filter .25s ease, opacity .25s ease; }
+    .btn:hover{ transform: translateY(-1px); filter: saturate(1.1); }
+    .btn:active{ transform: translateY(0); }
+    .btn:focus-visible{ outline:none; box-shadow: var(--focus); }
+
+    /* ===== SECTION HEADER ===== */
+    section{ padding: 72px 0; }
+    .section-head{ text-align:center; }
+    .subtitle{ color:var(--muted); letter-spacing:.35em; text-transform:uppercase; font-size:12px; margin-bottom:10px; }
+    .title{ font-size: clamp(24px, 5vw, 44px); line-height:1.15; margin:0 auto 6px; }
+    .lead{ color:var(--muted); margin:0 auto; max-width: 780px; }
+
+    /* ===== POLICY LAYOUT ===== */
+    .policy-toolbar{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; margin: 24px 0 12px; }
+    .search{ flex: 1 1 280px; display:flex; align-items:center; gap:10px; background:var(--surface-2); border:1px solid var(--border); border-radius: var(--radius); padding:8px 12px; }
+    .search input{ flex:1; background:transparent; border:0; color:var(--text); outline:none; font:inherit; }
+
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; }
+    .action{ padding:8px 12px; font-weight:600; background:transparent; color:var(--text); border:1px solid var(--border); border-radius: var(--radius); cursor:pointer; }
+    .action:focus-visible{ outline:none; box-shadow: var(--focus); }
+
+    .filters{ display:flex; gap:8px; flex-wrap:wrap; margin: 4px 0 24px; }
+    .filter{ display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border:1px solid var(--border); border-radius: 999px; color:var(--muted); background:transparent; cursor:pointer; font-size:13px; }
+    .filter[aria-pressed="true"]{ color:#0b0e13; background:linear-gradient(90deg,var(--accent),var(--accent-2)); border-color: transparent; }
+    .count{ color:var(--muted); font-size:12px; margin-left:auto; }
+
+    .policies{ display:grid; gap:14px; }
+    details.policy{ background:var(--surface-2); border:1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow:hidden; }
+    details.policy summary{ list-style:none; cursor:pointer; user-select:none; }
+    details.policy summary::-webkit-details-marker{ display:none; }
+    .policy-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(0,0,0,.02)); border-bottom:1px solid var(--border); }
+    .policy-title{ margin:0; font-size:16px; letter-spacing:.2px; }
+    .policy-tags{ display:flex; gap:6px; flex-wrap:wrap; margin-left:auto; }
+    .pill{ display:inline-block; font-size:12px; padding:4px 10px; border:1px solid var(--border); border-radius: 999px; color:var(--muted); }
+    .policy-actions{ display:flex; gap:6px; }
+    .icon-btn{ display:inline-flex; align-items:center; justify-content:center; gap:6px; padding:6px 8px; border:1px solid var(--border); border-radius: var(--radius); background:transparent; color:var(--muted); cursor:pointer; }
+    .icon-btn:hover{ color:var(--text); }
+
+    .policy-body{ padding: 14px 16px; }
+    .policy-body h4{ margin: 18px 0 8px; font-size:14px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); }
+    .policy-body p, .policy-body li{ color:var(--text); }
+    .note{ color:var(--muted); font-size:13px; }
+
+    /* Tables reused */
+    .card{ background:var(--surface-2); border:1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow:hidden; }
+
+    /* ===== FOOTER ===== */
+    footer{ background:var(--surface); border-top:1px solid var(--border); margin-top: 64px; padding-left: 10px; }
+    .footer-grid{ display:grid; gap:18px; grid-template-columns: 2fr 1fr 1fr; padding: 28px 0; }
+    @media (max-width: 820px){ .footer-grid{ grid-template-columns: 1fr; } }
+    .copyright{ border-top:1px solid var(--border); padding: 14px 0; color:var(--muted); font-size:14px; }
+    .footer-col h4{ margin:0 0 10px; font-size:14px; text-transform:uppercase; letter-spacing:.15em; color:var(--muted); }
+    .footer-col a{ color:var(--text); display:block; padding:6px 0; }
+    .footer-col a:hover{ opacity:.9; }
+
+    /* ===== SCROLL REVEAL ===== */
+    .reveal{ opacity:0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in-view{ opacity:1; transform:none; }
+    @media (prefers-reduced-motion: reduce){ *{ transition: none !important; animation-duration: 0.001ms !important; } .hero::before{ transition:none; } .reveal{ opacity:1; transform:none; } }
+
+    /* ===== UTIL ===== */
+    .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    .space-s{ height:8px; }
+
+    /* ===== PRINT ===== */
+    @media print{
+      .topbar, .hero, .policy-toolbar, .filters, .policy-actions, footer{ display:none !important; }
+      body{ background:#fff; color:#000; }
+      details.policy{ border:1px solid #ccc; box-shadow:none; }
+      details.policy[open] .policy-head{ border-bottom:1px solid #ddd; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== Top Navigation (Section 1) ===== -->
+  <header class="topbar" role="banner">
+    <div class="container nav" aria-label="Primary">
+      <a class="brand" href="index.html#top" aria-label="Home">
+        <img alt="Logo" src='https://i.imgur.com/XpO73I9.png' />
+        <span>OSS</span>
+      </a>
+
+      <nav>
+        <button class="burger" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Toggle navigation">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
+        </button>
+
+        <div id="navMenu" class="nav-links" role="menubar">
+          <a class="nav-link" role="menuitem" href="index.html#hero">Home</a>
+          <a class="nav-link" role="menuitem" href="index.html#events-head">Events</a>
+          <div class="dropdown" data-dropdown aria-expanded="false">
+            <button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-schedule">
+              Schedule <span class="caret" aria-hidden="true"></span>
+            </button>
+            <div id="menu-schedule" class="dropdown-menu" role="menu" aria-label="Schedule submenu">
+              <a role="menuitem" href="policies.html" aria-current="page">Policies</a>
+              <a role="menuitem" href="informations.html">Informations</a>
+              <a role="menuitem" href="rules.html">Rules</a>
+              <a role="menuitem" href="divisions.html">Divisions</a>
+            </div>
+          </div>
+          <a class="nav-link" role="menuitem" href="#footer">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== Hero (Section 2) ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-inner container reveal" data-animate="fade">
+      <div class="eyebrow">Open Submission Series</div>
+      <h1>Policies</h1>
+      <p class="lead">Know the rules before you play. This page summarizes eligibility, conduct, formats, safety, refunds, media, and more.</p>
+      <a class="btn" href="#policies" role="button">Browse Policies</a>
+    </div>
+  </section>
+
+  <!-- ===== Intro / Tools ===== -->
+  <section id="policies">
+    <div class="container section-head reveal" data-animate="fade-up">
+      <div class="subtitle">– Policies –</div>
+      <h2 class="title">Our standards & expectations</h2>
+      <p class="lead">These policies apply to all OSS events and programs unless a specific event page states otherwise. If you still have questions, contact us at <a class="link" href="mailto:info@example.com">info@example.com</a>.</p>
+    </div>
+
+    <div class="container">
+      <div class="policy-toolbar">
+        <label class="search" aria-label="Search policies">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27a6.471 6.471 0 001.48-4.23C15.91 6.01 13.4 3.5 10.41 3.5 7.42 3.5 4.91 6.01 4.91 9s2.51 5.5 5.5 5.5c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l4.25 4.25 1.27-1.27L15.5 14zm-5.09 0C8.01 14 6 11.99 6 9.59S8.01 5.18 10.41 5.18s4.41 2.01 4.41 4.41S12.8 14 10.41 14z"/></svg>
+          <input id="policySearch" type="search" placeholder="Search by keyword (e.g., refunds, safety, seeding)…" autocomplete="off" />
+        </label>
+        <div class="actions">
+          <button class="action" id="expandAll" type="button" aria-expanded="false">Expand all</button>
+          <button class="action" id="collapseAll" type="button">Collapse all</button>
+          <span class="count" id="resultCount" aria-live="polite"></span>
+        </div>
+      </div>
+
+      <div class="filters" id="tagFilters" aria-label="Filter by tag"></div>
+
+      <div class="policies" id="policyList" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer id="footer">
+    <div class="container footer-grid reveal" data-animate="fade-up">
+      <div class="footer-col">
+        <h4>About</h4>
+        <p class="lead">OSS is ___. Our mission is to create fair, transparent, and competitive events open to all eligible participants.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Links</h4>
+        <a href="index.html#hero">Home</a>
+        <a href="index.html#events-head">Events</a>
+        <a href="#policies">Policies</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:info@example.com" class="link">info@example.com</a>
+        <span class="space-s"></span>
+        <span class="pill">Mon–Sun · 9–5</span>
+      </div>
+    </div>
+    <div class="container copyright">
+      © <span id="year"></span> OSS. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    /* ------------------------------
+     * 1) MOBILE NAV TOGGLE (same as index)
+     * ------------------------------ */
+    (function(){
+      const toggle = document.getElementById('navToggle');
+      const menu = document.getElementById('navMenu');
+      if(!toggle || !menu) return;
+      const closeMenu = () => {
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        document.querySelectorAll('[data-dropdown].open').forEach(d => {
+          d.classList.remove('open');
+          d.setAttribute('aria-expanded','false');
+          d.querySelector('.dropdown-toggle')?.setAttribute('aria-expanded','false');
+        });
+      };
+      toggle.addEventListener('click', () => {
+        const open = menu.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(open));
+      });
+      menu.addEventListener('click', (e) => {
+        const isLink = e.target.closest('a.nav-link');
+        if (isLink && window.matchMedia('(max-width: 820px)').matches) closeMenu();
+      });
+      document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+          if (window.matchMedia('(max-width: 820px)').matches) closeMenu();
+        }
+      });
+    })();
+
+    /* ------------------------------
+     * 2) ACCESSIBLE DROPDOWNS (same pattern)
+     * ------------------------------ */
+    ;(function(){
+      const dropdowns = document.querySelectorAll('[data-dropdown]');
+      const isMobile = () => window.matchMedia('(max-width: 820px)').matches;
+      dropdowns.forEach(drop => {
+        const btn = drop.querySelector('.dropdown-toggle');
+        const menu = drop.querySelector('.dropdown-menu');
+        const items = Array.from(menu.querySelectorAll('a'));
+        function open(){ drop.classList.add('open'); drop.setAttribute('aria-expanded','true'); btn.setAttribute('aria-expanded','true'); if (isMobile()) menu.style.display = 'block'; }
+        function close(){ drop.classList.remove('open'); drop.setAttribute('aria-expanded','false'); btn.setAttribute('aria-expanded','false'); if (isMobile()) menu.style.display = 'none'; }
+        function toggle(){ (drop.classList.contains('open')) ? close() : open(); }
+        btn.addEventListener('click', (e) => { e.preventDefault(); if (isMobile()){ document.querySelectorAll('[data-dropdown].open').forEach(d => { if(d!==drop) d.classList.remove('open'); }); } toggle(); });
+        btn.addEventListener('keydown', (e) => { if (e.key === 'ArrowDown'){ e.preventDefault(); open(); items[0]?.focus(); } });
+        menu.addEventListener('keydown', (e) => { const i = items.indexOf(document.activeElement); if (e.key === 'Escape'){ e.preventDefault(); close(); btn.focus(); } if (e.key === 'ArrowDown'){ e.preventDefault(); items[Math.min(i+1, items.length-1)]?.focus(); } if (e.key === 'ArrowUp'){ e.preventDefault(); items[Math.max(i-1, 0)]?.focus(); } if (e.key === 'Home'){ e.preventDefault(); items[0]?.focus(); } if (e.key === 'End'){ e.preventDefault(); items[items.length-1]?.focus(); } });
+        document.addEventListener('click', (e) => { if (!drop.contains(e.target) && drop.classList.contains('open') && isMobile()){ close(); } });
+        drop.addEventListener('focusout', (e) => { if (!drop.contains(e.relatedTarget) && !isMobile()){ close(); } });
+      });
+    })();
+
+    /* ------------------------------
+     * 3) SCROLL REVEAL
+     * ------------------------------ */
+    ;(function(){
+      const items = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in-view'); io.unobserve(entry.target); } });
+        }, { threshold: 0.3 });
+        items.forEach(el => io.observe(el));
+      } else { items.forEach(el => el.classList.add('in-view')); }
+    })();
+
+    /* ------------------------------
+     * 4) POLICIES DATA & RENDERING
+     * ------------------------------ */
+    const lastUpdated = '2025-08-18'; // set to actual update date
+
+    const policies = [
+      {
+        id: 'code-of-conduct',
+        title: 'Code of Conduct',
+        tags: ['conduct','safety','respect'],
+        summary: 'Sportsmanship, respect for officials and fellow competitors, and a zero-tolerance stance on harassment.',
+        body: `
+          <p>All participants, coaches, and spectators must uphold a professional standard of behavior. Harassment, hate speech, intimidation, or discriminatory remarks will not be tolerated.</p>
+          <ul>
+            <li>Treat officials, staff, competitors, and venue personnel with respect.</li>
+            <li>No abusive language, threats, or targeted harassment (online or offline).</li>
+            <li>Follow all instructions from OSS staff and event officials.</li>
+            <li>Alcohol or substance impairment is not permitted while competing.</li>
+          </ul>
+          <p class="note">Violations may result in penalties up to removal from the venue and disqualification from current and future events.</p>
+        `
+      },
+      {
+        id: 'eligibility-registration',
+        title: 'Eligibility & Registration',
+        tags: ['eligibility','registration'],
+        summary: 'Who can play, age requirements, ID checks, and registration windows.',
+        body: `
+          <ul>
+            <li>Players must register before the stated deadline on the event page.</li>
+            <li>Government-issued photo ID (or school ID for minors) is required at check-in.</li>
+            <li>Participants under 18 must have a parent/guardian consent on file.</li>
+            <li>OSS reserves the right to reject entries that provide false or incomplete information.</li>
+          </ul>
+        `
+      },
+      {
+        id: 'divisions-seeding',
+        title: 'Divisions & Seeding',
+        tags: ['divisions','format','seeding'],
+        summary: 'How divisions are structured and how seeding is determined.',
+        body: `
+          <p>Divisions (e.g., Open, Advanced, Beginner) may be offered based on demand. OSS may merge or split divisions to maintain competitive integrity.</p>
+          <ul>
+            <li>Seeding uses recent OSS results, comparable events, and bracket balance considerations.</li>
+            <li>Late entrants may be placed at the bottom of the seed list.</li>
+            <li>Seeding disputes must be raised before brackets are finalized.</li>
+          </ul>
+        `
+      },
+      {
+        id: 'check-in-punctuality',
+        title: 'Check‑in & Punctuality',
+        tags: ['check-in','timing','schedule'],
+        summary: 'Arrival windows, no‑show policy, and lateness penalties.',
+        body: `
+          <ul>
+            <li>Arrive at least 30 minutes before your first scheduled match.</li>
+            <li>No‑shows at match time may forfeit the match at the official’s discretion after a 10‑minute grace period.</li>
+            <li>Repeated lateness can lead to disqualification.</li>
+          </ul>
+        `
+      },
+      {
+        id: 'match-rules-formats',
+        title: 'Match Rules & Formats',
+        tags: ['rules','format','matches'],
+        summary: 'Scoring, best‑of formats, tiebreaks, and equipment checks.',
+        body: `
+          <ul>
+            <li>Default format is announced on the event page (e.g., Best‑of‑3). Finals may differ.</li>
+            <li>Officials may perform random equipment checks at any time.</li>
+            <li>Any attempt to gain an unfair advantage (cheating, device tampering) will result in immediate sanctions.</li>
+          </ul>
+        `
+      },
+      {
+        id: 'equipment-attire',
+        title: 'Equipment & Attire',
+        tags: ['equipment','attire','safety'],
+        summary: 'Approved gear, prohibited items, and attire guidelines.',
+        body: `
+          <ul>
+            <li>Use only event‑approved equipment as listed on the event page or ruleset.</li>
+            <li>Prohibited items include any equipment that poses a safety risk or violates venue policy.</li>
+            <li>Closed‑toe shoes are required on the field of play where applicable.</li>
+          </ul>
+        `
+      },
+      {
+        id: 'officials-judging',
+        title: 'Officials & Judging',
+        tags: ['officials','judging'],
+        summary: 'Authority of referees and how on‑site calls are made.',
+        body: `
+          <p>Officials have the final say on rules interpretations, penalties, and match outcomes. Respectful questions are welcome; argumentative behavior is not.</p>
+          <ul>
+            <li>Calls are based on the published ruleset and officials’ discretion.</li>
+            <li>Video replays may be used when available; otherwise, the on‑field decision stands.</li>
+          </ul>
+        `
+      },
+      {
+        id: 'protests-appeals',
+        title: 'Protests & Appeals',
+        tags: ['appeals','disputes'],
+        summary: 'How to file a protest and the appeal timeline.',
+        body: `
+          <ul>
+            <li>File protests with an OSS official within 15 minutes of the match end.</li>
+            <li>Provide a concise written summary and any supporting evidence.</li>
+            <li>Appeals are reviewed by the Head Official or Tournament Director; decisions are final.</li>
+          </ul>
+        `
+      },
+      {
+        id: 'safety-medical',
+        title: 'Safety & Medical',
+        tags: ['safety','medical','well‑being'],
+        summary: 'Injury reporting, first‑aid, and heat/weather precautions.',
+        body: `
+          <ul>
+            <li>Report injuries to an OSS official immediately. Basic first‑aid may be available on‑site.</li>
+            <li>Hydration and rest breaks are encouraged between matches.</li>
+            <li>OSS may adjust schedules for extreme weather or unsafe conditions.</li>
+          </ul>
+        `
+      },
+      {
+        id: 'media-likeness',
+        title: 'Media, Photography & Likeness',
+        tags: ['media','photography','privacy'],
+        summary: 'Recording at events and use of names, images, and results.',
+        body: `
+          <p>By entering an OSS venue, attendees consent to photography, audio, and video recording for promotional and archival purposes.</p>
+          <ul>
+            <li>OSS may publish competitor names, brackets, and results.</li>
+            <li>Personal recording must not disrupt play or violate others’ privacy.</li>
+          </ul>
+        `
+      },
+      {
+        id: 'privacy-data',
+        title: 'Privacy & Data',
+        tags: ['privacy','data'],
+        summary: 'What we collect during registration and how we use it.',
+        body: `
+          <ul>
+            <li>We collect basic contact information, division selection, and emergency contact where required.</li>
+            <li>Data is used to administer events, communicate updates, and publish results.</li>
+            <li>We do not sell personal data. See event forms for additional disclosures.</li>
+          </ul>
+        `
+      },
+      {
+        id: 'refunds-cancellations',
+        title: 'Refunds, Transfers & Cancellations',
+        tags: ['refunds','cancellations','entries'],
+        summary: 'When fees can be refunded or transferred and what happens if an event is canceled.',
+        body: `
+          <ul>
+            <li>Refunds are generally available up to 7 days before the event minus processing fees.</li>
+            <li>Within 7 days, entries may be transferred to another eligible player if approved by OSS.</li>
+            <li>If OSS cancels an event, full refunds are issued to the original payment method.</li>
+          </ul>
+        `
+      },
+      {
+        id: 'weather-force-majeure',
+        title: 'Weather & Force Majeure',
+        tags: ['weather','schedule'],
+        summary: 'Delays, postponements, or format changes due to conditions beyond our control.',
+        body: `
+          <p>OSS may delay, modify, or cancel play to ensure safety. Where possible, alternate dates or formats will be offered; however, they are not guaranteed.</p>
+        `
+      },
+      {
+        id: 'accessibility-inclusion',
+        title: 'Accessibility & Inclusion',
+        tags: ['accessibility','inclusion'],
+        summary: 'Reasonable accommodations and an inclusive environment for all.',
+        body: `
+          <ul>
+            <li>Reasonable accommodations are available upon request. Please contact us at least 72 hours before the event.</li>
+            <li>Service animals permitted as allowed by venue policy.</li>
+            <li>All participants are expected to support an inclusive environment.</li>
+          </ul>
+        `
+      },
+      {
+        id: 'sanctions-disqualification',
+        title: 'Sanctions & Disqualification',
+        tags: ['sanctions','conduct'],
+        summary: 'Grounds for warnings, penalties, and removal from competition.',
+        body: `
+          <ul>
+            <li>Progressive discipline may include warning, game loss, match loss, or event removal.</li>
+            <li>Severe violations (violence, cheating, harassment) may result in immediate disqualification and a ban from future events.</li>
+          </ul>
+        `
+      },
+      {
+        id: 'lost-found',
+        title: 'Personal Property & Lost‑and‑Found',
+        tags: ['venue','property'],
+        summary: 'Responsibility for personal items and how to inquire about lost property.',
+        body: `
+          <ul>
+            <li>OSS and venues are not responsible for lost or stolen items. Do not leave valuables unattended.</li>
+            <li>Check with the event desk for lost‑and‑found during the event or email us afterwards.</li>
+          </ul>
+        `
+      },
+      {
+        id: 'contact-escalation',
+        title: 'Contact & Escalation',
+        tags: ['contact'],
+        summary: 'How to reach OSS staff before, during, and after events.',
+        body: `
+          <ul>
+            <li>General inquiries: <a class="link" href="mailto:info@example.com">info@example.com</a></li>
+            <li>On‑site issues: speak to the Event Desk or Head Official immediately.</li>
+            <li>Post‑event feedback: email within 72 hours for the fastest response.</li>
+          </ul>
+        `
+      }
+    ];
+
+    function formatDate(iso){
+      const d = new Date(iso + 'T12:00:00');
+      return Number.isNaN(d.getTime()) ? iso : new Intl.DateTimeFormat(undefined,{year:'numeric', month:'short', day:'2-digit'}).format(d);
+    }
+
+    function makeTagPill(tag){
+      const span = document.createElement('span');
+      span.className = 'pill';
+      span.textContent = tag;
+      return span;
+    }
+
+    function renderPolicies(){
+      const list = document.getElementById('policyList');
+      const search = (document.getElementById('policySearch').value || '').trim().toLowerCase();
+      const selected = new Set(Array.from(document.querySelectorAll('.filter[aria-pressed="true"]')).map(b => b.dataset.tag));
+
+      list.innerHTML = '';
+      let visible = 0;
+
+      for (const p of policies){
+        const hay = [p.title, p.summary, p.body, ...(p.tags||[])].join(' ').toLowerCase();
+        const matchesText = !search || hay.includes(search);
+        const matchesTags = selected.size === 0 || (p.tags||[]).some(t => selected.has(t));
+        if (!matchesText || !matchesTags) continue;
+        visible++;
+
+        const details = document.createElement('details');
+        details.className = 'policy';
+        details.id = p.id;
+
+        const summary = document.createElement('summary');
+        const head = document.createElement('div'); head.className = 'policy-head';
+
+        const title = document.createElement('h3'); title.className = 'policy-title'; title.textContent = p.title; head.appendChild(title);
+
+        const tags = document.createElement('div'); tags.className = 'policy-tags'; (p.tags||[]).forEach(t => tags.appendChild(makeTagPill(t))); head.appendChild(tags);
+
+        const actions = document.createElement('div'); actions.className = 'policy-actions';
+        const linkBtn = document.createElement('button'); linkBtn.type='button'; linkBtn.className='icon-btn'; linkBtn.setAttribute('aria-label','Copy link');
+        linkBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 12a5 5 0 015-5h4v2H8a3 3 0 100 6h4v2H8a5 5 0 01-5-5zm8-3h5a5 5 0 010 10h-5v-2h5a3 3 0 100-6h-5V9z"/></svg>';
+        linkBtn.addEventListener('click', () => { const url = location.origin + location.pathname + '#' + p.id; navigator.clipboard?.writeText(url); linkBtn.textContent='Link copied'; setTimeout(()=> linkBtn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 12a5 5 0 015-5h4v2H8a3 3 0 100 6h4v2H8a5 5 0 01-5-5zm8-3h5a5 5 0 010 10h-5v-2h5a3 3 0 100-6h-5V9z"/></svg>', 1200); });
+        actions.appendChild(linkBtn);
+
+        const dateBadge = document.createElement('span'); dateBadge.className='pill'; dateBadge.textContent = 'Updated ' + formatDate(lastUpdated);
+        actions.appendChild(dateBadge);
+
+        head.appendChild(actions);
+        summary.appendChild(head);
+        details.appendChild(summary);
+
+        const body = document.createElement('div'); body.className = 'policy-body'; body.innerHTML = `<p class="note">Summary: ${p.summary}</p>` + p.body;
+        details.appendChild(body);
+
+        list.appendChild(details);
+      }
+
+      document.getElementById('resultCount').textContent = visible + ' policy' + (visible===1?'':'ies') + ' shown';
+
+      // If a hash is present and matches, open it
+      const targetId = location.hash.slice(1);
+      if (targetId){
+        const el = document.getElementById(targetId);
+        if (el && el.tagName.toLowerCase()==='details'){
+          el.open = true;
+          setTimeout(()=> el.scrollIntoView({ behavior:'smooth', block:'start' }), 50);
+        }
+      }
+    }
+
+    function renderFilters(){
+      const container = document.getElementById('tagFilters');
+      const all = new Set(policies.flatMap(p => p.tags||[]));
+      container.innerHTML = '';
+      const mk = (tag) => {
+        const b = document.createElement('button');
+        b.className = 'filter'; b.type='button'; b.dataset.tag = tag; b.setAttribute('aria-pressed','false'); b.textContent = tag;
+        b.addEventListener('click', () => { const on = b.getAttribute('aria-pressed')==='true'; b.setAttribute('aria-pressed', String(!on)); renderPolicies(); });
+        return b;
+      };
+      // Common buckets first
+      const priority = ['conduct','rules','safety','refunds','divisions','format','registration'];
+      const ordered = [...new Set([...priority.filter(t => all.has(t)), ...Array.from(all).sort()])];
+      ordered.forEach(tag => container.appendChild(mk(tag)));
+    }
+
+    // Search interactions
+    (function(){
+      let t; const input = document.getElementById('policySearch');
+      input.addEventListener('input', () => { clearTimeout(t); t = setTimeout(renderPolicies, 150); });
+      document.getElementById('expandAll').addEventListener('click', () => {
+        document.querySelectorAll('#policyList details.policy').forEach(d => d.open = true);
+      });
+      document.getElementById('collapseAll').addEventListener('click', () => {
+        document.querySelectorAll('#policyList details.policy').forEach(d => d.open = false);
+      });
+      // Open all before printing for readability
+      window.addEventListener('beforeprint', () => { document.querySelectorAll('#policyList details.policy').forEach(d => d.open = true); });
+    })();
+
+    // Init
+    renderFilters();
+    renderPolicies();
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
