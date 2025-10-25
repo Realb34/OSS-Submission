@@ -2,14 +2,9 @@
    Index Page Specific JavaScript
    ========================================= */
 
-// Events data
-const events = [
-  { date: '2025-09-12', title: 'District Championship', location: 'Downtown Ft Myers', url: '#' },
-  { date: '2025-10-05', title: 'Roll around the wings', location: 'Blue store', url: '#' },
-  { date: '2025-11-22', title: 'Sign ups and Meet & Greet', location: 'Edison Mall', url: '#' },
-  { date: '2025-07-18', title: 'District Championship', location: 'Cape High School', url: '#' },
-  { date: '2025-06-02', title: 'Community Blood Drive Tournament', location: 'Scoops & Treats', url: '#' },
-];
+// Events data - now loaded from centralized events-data.js
+// IMPORTANT: To modify events, edit assets/events-data.js instead of this file
+const events = window.OSSEvents || [];
 
 function formatDate(iso) {
   const d = new Date(iso + 'T12:00:00');
