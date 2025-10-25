@@ -6,6 +6,8 @@
   <title>OSS - Open Submission Series</title>
   <meta name="color-scheme" content="dark light" />
   <link rel="stylesheet" href="assets/style.css" />
+  <script src="assets/config.js"></script>
+  <script src="assets/components.js"></script>
 </head>
 <body>
   <!-- ===== Top Navigation (Section 1) ===== -->
@@ -145,7 +147,7 @@
     <div class="container footer-grid reveal" data-animate="fade-up">
       <div class="footer-col">
         <h4>About</h4>
-        <p class="lead">OSS is a unified force.</p>
+        <p class="lead">OSS is ___.</p>
       </div>
       <div class="footer-col">
         <h4>Links</h4>
@@ -167,7 +169,15 @@
 
 
   <!-- ===== JS (Centralized + Page-Specific) ===== -->
+  <script src="assets/events-data.js"></script>
   <script src="assets/main.js"></script>
   <script src="assets/index-page.js"></script>
+  <script>
+    // Initialize components with page-specific content
+    document.addEventListener('DOMContentLoaded', () => {
+      OSSComponents.initHeader('home');
+      OSSComponents.initFooter();
+    });
+  </script>
 </body>
 </html>
