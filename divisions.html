@@ -7,6 +7,8 @@
   <meta name="color-scheme" content="dark light" />
   <meta name="description" content="OSS (Open Submission Series) divisions: skill tiers, age groups, and team formats with filters, search, and a division finder." />
   <link rel="stylesheet" href="assets/style.css" />
+  <script src="assets/config.js"></script>
+  <script src="assets/components.js"></script>
 </head>
 <body>
   <!-- ===== Top Navigation ===== -->
@@ -142,7 +144,7 @@
     <div class="container footer-grid reveal" data-animate="fade-up">
       <div class="footer-col">
         <h4>About</h4>
-        <p class="lead">OSS is a unified force. Our mission is to bring transparent and beautiful competition across accessible divisions.</p>
+        <p class="lead">OSS is ___. Our mission is to host fair, transparent competition across accessible divisions.</p>
       </div>
       <div class="footer-col">
         <h4>Links</h4>
@@ -164,5 +166,12 @@
 
   <script src="assets/main.js"></script>
   <script src="assets/divisions-page.js"></script>
+  <script>
+    // Initialize components with page-specific content
+    document.addEventListener('DOMContentLoaded', () => {
+      OSSComponents.initHeader('divisions');
+      OSSComponents.initFooter('OSS is a premier tournament organization. Our mission is to host fair, transparent competition across accessible divisions.');
+    });
+  </script>
 </body>
 </html>
