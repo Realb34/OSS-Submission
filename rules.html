@@ -7,6 +7,8 @@
   <meta name="color-scheme" content="dark light" />
   <meta name="description" content="Official OSS (Open Submission Series) competitive rules: formats, scoring, timing, equipment, penalties, tiebreakers, officials, and more." />
   <link rel="stylesheet" href="assets/style.css" />
+  <script src="assets/config.js"></script>
+  <script src="assets/components.js"></script>
 </head>
 <body>
   <!-- ===== Top Navigation ===== -->
@@ -517,6 +519,10 @@
     document.getElementById('versionBadge').setAttribute('title', 'OSS Rules ' + rulesetVersion);
     renderFilters();
     renderRules();
+
+    // Initialize components with page-specific content
+    OSSComponents.initHeader('rules');
+    OSSComponents.initFooter('OSS is a premier tournament organization. Our mission is to run fair, transparent competitions with clear rules everyone understands.');
   </script>
 </body>
 </html>
