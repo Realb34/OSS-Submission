@@ -7,6 +7,8 @@
   <meta name="color-scheme" content="dark light" />
   <meta name="description" content="Official OSS (Open Submission Series) tournament policies: eligibility, conduct, formats, safety, media, refunds, and more." />
   <link rel="stylesheet" href="assets/style.css" />
+  <script src="assets/config.js"></script>
+  <script src="assets/components.js"></script>
 </head>
 <body>
   <!-- ===== Top Navigation (Section 1) ===== -->
@@ -504,6 +506,10 @@
 
     // Footer year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Initialize components with page-specific content
+    OSSComponents.initHeader('policies');
+    OSSComponents.initFooter('OSS is a premier tournament organization. Our mission is to create fair, transparent, and competitive events open to all eligible participants.');
   </script>
 </body>
 </html>
