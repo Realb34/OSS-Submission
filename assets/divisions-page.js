@@ -249,7 +249,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (finderBtn) {
     finderBtn.addEventListener('click', runFinder);
   }
-
   const targetId = location.hash.slice(1);
   if (targetId){
     const el = document.getElementById(targetId);
