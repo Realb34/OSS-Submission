@@ -9,7 +9,9 @@
   --surface: #111218;
   --surface-2: #171923;
   --text: #e7e9ee;
+  --text-high-contrast: #ffffff;
   --muted: #a1a6b3;
+  --muted-readable: #b8bdc9;
   --accent: #e05024;
   --accent-2: #fff68d;
   --border: #1f2330;
@@ -326,6 +328,13 @@ img{ max-width:100%; display:block; }
   .dropdown:hover .dropdown-menu{
     display:block;
   }
+  /* Add delay before closing to prevent accidental dismissal */
+  .dropdown .dropdown-menu{
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.3s;
+  }
+  .dropdown:hover .dropdown-menu{
+    transition-delay: 0s, 0s, 0s;
+  }
 }
 
 /* Mobile layout */
@@ -438,9 +447,9 @@ img{ max-width:100%; display:block; }
 .btn{
   display:inline-block;
   padding:12px 18px;
-  font-weight:600;
+  font-weight:700;
   background:linear-gradient(135deg,var(--accent),var(--accent-2));
-  color:#0b0e13;
+  color:#000000;
   border:0;
   border-radius: var(--radius);
   box-shadow: 0 4px 15px rgba(224, 80, 36, 0.4);
@@ -715,7 +724,7 @@ section{
 .section-head{ text-align:center; }
 
 .subtitle{
-  color:var(--muted);
+  color:var(--muted-readable);
   letter-spacing:.35em;
   text-transform:uppercase;
   font-size:12px;
@@ -742,9 +751,10 @@ section{
 }
 
 .lead{
-  color:var(--muted);
+  color:var(--muted-readable);
   margin:0 auto;
   max-width: 680px;
+  line-height: 1.7;
 }
 
 /* ===== CARDS (Hover Effects) ===== */
@@ -872,10 +882,11 @@ tbody tr:active{
 }
 
 .pill.warn{
-  color:#0b0e13;
+  color:#000000;
   background: var(--accent-2);
   border-color: transparent;
   box-shadow: 0 4px 12px rgba(255, 246, 141, 0.3);
+  font-weight: 600;
 }
 
 .link{
@@ -957,7 +968,8 @@ tbody tr:active{
 }
 
 .filter[aria-pressed="true"]{
-  color:#0b0e13;
+  color:#000000;
+  font-weight: 600;
   background:linear-gradient(90deg,var(--accent),var(--accent-2));
   border-color: transparent;
   transform: scale(1.05);
@@ -1132,6 +1144,29 @@ footer{
   opacity:.9;
   transform: translateX(5px);
   color: var(--accent);
+}
+
+.social-links{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.social-links a{
+  display:inline-flex;
+  align-items:center;
+  padding:6px 12px;
+  border:1px solid var(--border);
+  border-radius: var(--radius);
+  font-size:13px;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover{
+  background: rgba(255,255,255,0.05);
+  border-color: var(--accent);
+  transform: translateY(-2px) translateX(0);
 }
 
 /* ===== SCROLL REVEAL (Enhanced) ===== */
