@@ -82,17 +82,18 @@ function renderFooter(aboutText = '') {
   const config = window.OSSConfig;
   const about = aboutText || config.about.short;
 
-  // Build social media links
+  // Build social media links (only show if at least one is populated)
   let socialHTML = '';
   if (config.social && Object.keys(config.social).length > 0) {
-    socialHTML = '<div class="social-links">';
-    Object.entries(config.social).forEach(([platform, url]) => {
-      if (url) {
+    const activeSocials = Object.entries(config.social).filter(([, url]) => url && url.trim() !== '');
+    if (activeSocials.length > 0) {
+      socialHTML = '<div class="social-links">';
+      activeSocials.forEach(([platform, url]) => {
         const platformName = platform.charAt(0).toUpperCase() + platform.slice(1);
-        socialHTML += `<a href="${url}" target="_blank" rel="noopener" aria-label="${platformName}">${platformName}</a>`;
-      }
-    });
-    socialHTML += '</div>';
+        socialHTML += `<a href="${url}" target="_blank" rel="noopener noreferrer" aria-label="${platformName}">${platformName}</a>`;
+      });
+      socialHTML += '</div>';
+    }
   }
 
   return `
