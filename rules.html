@@ -12,39 +12,8 @@
 </head>
 <body>
   <!-- ===== Top Navigation ===== -->
-  <header class="topbar" role="banner">
-    <div class="container nav" aria-label="Primary">
-      <a class="brand" href="index.html#top" aria-label="Home">
-        <img alt="Logo" src='https://i.imgur.com/XpO73I9.png' />
-        <span>OSS</span>
-      </a>
-
-      <nav>
-        <button class="burger" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Toggle navigation">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
-        </button>
-
-        <div id="navMenu" class="nav-links" role="menubar">
-          <a class="nav-link" role="menuitem" href="index.html#hero">Home</a>
-          <a class="nav-link" role="menuitem" href="index.html#events-head">Events</a>
-
-          <div class="dropdown" data-dropdown aria-expanded="false">
-            <button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-schedule">
-              Schedule <span class="caret" aria-hidden="true"></span>
-            </button>
-            <div id="menu-schedule" class="dropdown-menu" role="menu" aria-label="Schedule submenu">
-              <a role="menuitem" href="policies.html">Policies</a>
-              <a role="menuitem" href="informations.html">Informations</a>
-              <a role="menuitem" href="rules.html" aria-current="page">Rules</a>
-              <a role="menuitem" href="divisions.html">Divisions</a>
-            </div>
-          </div>
-
-          <a class="nav-link" role="menuitem" href="#footer">Contact</a>
-        </div>
-      </nav>
-    </div>
-  </header>
+  <!-- This will be replaced by components.js -->
+  <header class="topbar" role="banner"></header>
 
   <!-- ===== Hero ===== -->
   <section class="hero" id="hero">
@@ -110,98 +79,13 @@
   </section>
 
   <!-- ===== Footer ===== -->
-  <footer id="footer">
-    <div class="container footer-grid reveal" data-animate="fade-up">
-      <div class="footer-col">
-        <h4>About</h4>
-        <p class="lead">OSS is ___. Our mission is to run fair, transparent competitions with clear rules everyone understands.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Links</h4>
-        <a href="index.html#hero">Home</a>
-        <a href="index.html#events-head">Events</a>
-        <a href="#rules">Rules</a>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <a href="mailto:info@example.com" class="link">info@example.com</a>
-        <span class="space-s"></span>
-        <span class="pill">Mon–Sun · 9–5</span>
-      </div>
-    </div>
-    <div class="container copyright">
-      © <span id="year"></span> OSS. All rights reserved.
-    </div>
-  </footer>
+  <!-- This will be replaced by components.js -->
+  <footer id="footer"></footer>
 
+  <script src="assets/main.js"></script>
   <script>
     /* ------------------------------
-     * 1) MOBILE NAV TOGGLE
-     * ------------------------------ */
-    (function(){
-      const toggle = document.getElementById('navToggle');
-      const menu = document.getElementById('navMenu');
-      if(!toggle || !menu) return;
-      const closeMenu = () => {
-        menu.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-        document.querySelectorAll('[data-dropdown].open').forEach(d => {
-          d.classList.remove('open');
-          d.setAttribute('aria-expanded','false');
-          d.querySelector('.dropdown-toggle')?.setAttribute('aria-expanded','false');
-        });
-      };
-      toggle.addEventListener('click', () => {
-        const open = menu.classList.toggle('open');
-        toggle.setAttribute('aria-expanded', String(open));
-      });
-      menu.addEventListener('click', (e) => {
-        const isLink = e.target.closest('a.nav-link');
-        if (isLink && window.matchMedia('(max-width: 820px)').matches) closeMenu();
-      });
-      document.addEventListener('click', (e) => {
-        if (!menu.contains(e.target) && !toggle.contains(e.target)) {
-          if (window.matchMedia('(max-width: 820px)').matches) closeMenu();
-        }
-      });
-    })();
-
-    /* ------------------------------
-     * 2) ACCESSIBLE DROPDOWNS
-     * ------------------------------ */
-    ;(function(){
-      const dropdowns = document.querySelectorAll('[data-dropdown]');
-      const isMobile = () => window.matchMedia('(max-width: 820px)').matches;
-      dropdowns.forEach(drop => {
-        const btn = drop.querySelector('.dropdown-toggle');
-        const menu = drop.querySelector('.dropdown-menu');
-        const items = Array.from(menu.querySelectorAll('a'));
-        function open(){ drop.classList.add('open'); drop.setAttribute('aria-expanded','true'); btn.setAttribute('aria-expanded','true'); if (isMobile()) menu.style.display = 'block'; }
-        function close(){ drop.classList.remove('open'); drop.setAttribute('aria-expanded','false'); btn.setAttribute('aria-expanded','false'); if (isMobile()) menu.style.display = 'none'; }
-        function toggle(){ (drop.classList.contains('open')) ? close() : open(); }
-        btn.addEventListener('click', (e) => { e.preventDefault(); if (isMobile()){ document.querySelectorAll('[data-dropdown].open').forEach(d => { if(d!==drop) d.classList.remove('open'); }); } toggle(); });
-        btn.addEventListener('keydown', (e) => { if (e.key === 'ArrowDown'){ e.preventDefault(); open(); items[0]?.focus(); } });
-        menu.addEventListener('keydown', (e) => { const i = items.indexOf(document.activeElement); if (e.key === 'Escape'){ e.preventDefault(); close(); btn.focus(); } if (e.key === 'ArrowDown'){ e.preventDefault(); items[Math.min(i+1, items.length-1)]?.focus(); } if (e.key === 'ArrowUp'){ e.preventDefault(); items[Math.max(i-1, 0)]?.focus(); } if (e.key === 'Home'){ e.preventDefault(); items[0]?.focus(); } if (e.key === 'End'){ e.preventDefault(); items[items.length-1]?.focus(); } });
-        document.addEventListener('click', (e) => { if (!drop.contains(e.target) && drop.classList.contains('open') && isMobile()){ close(); } });
-        drop.addEventListener('focusout', (e) => { if (!drop.contains(e.relatedTarget) && !isMobile()){ close(); } });
-      });
-    })();
-
-    /* ------------------------------
-     * 3) SCROLL REVEAL
-     * ------------------------------ */
-    ;(function(){
-      const items = document.querySelectorAll('.reveal');
-      if ('IntersectionObserver' in window) {
-        const io = new IntersectionObserver((entries) => {
-          entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in-view'); io.unobserve(entry.target); } });
-        }, { threshold: 0.3 });
-        items.forEach(el => io.observe(el));
-      } else { items.forEach(el => el.classList.add('in-view')); }
-    })();
-
-    /* ------------------------------
-     * 4) RULES DATA & RENDERING
+     * RULES DATA & RENDERING
      * ------------------------------ */
     const rulesetVersion = 'v1.0';
     const lastUpdated = '2025-08-18';
@@ -514,15 +398,16 @@
     })();
 
     // Init
-    document.getElementById('year').textContent = new Date().getFullYear();
-    document.getElementById('updatedDate').textContent = new Intl.DateTimeFormat(undefined,{year:'numeric', month:'short', day:'2-digit'}).format(new Date(lastUpdated + 'T12:00:00'));
-    document.getElementById('versionBadge').setAttribute('title', 'OSS Rules ' + rulesetVersion);
-    renderFilters();
-    renderRules();
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('updatedDate').textContent = new Intl.DateTimeFormat(undefined,{year:'numeric', month:'short', day:'2-digit'}).format(new Date(lastUpdated + 'T12:00:00'));
+      document.getElementById('versionBadge').setAttribute('title', 'OSS Rules ' + rulesetVersion);
+      renderFilters();
+      renderRules();
 
-    // Initialize components with page-specific content
-    OSSComponents.initHeader('rules');
-    OSSComponents.initFooter('OSS is a premier tournament organization. Our mission is to run fair, transparent competitions with clear rules everyone understands.');
+      // Initialize components with page-specific content
+      OSSComponents.initHeader('rules');
+      OSSComponents.initFooter('OSS is a premier tournament organization. Our mission is to run fair, transparent competitions with clear rules everyone understands.');
+    });
   </script>
 </body>
 </html>
