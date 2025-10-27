@@ -15,18 +15,22 @@ const OSSConfig = {
   tagline: 'Fight for your spot.',
 
   // Contact Information
+  // IMPORTANT: Update these values to change contact info across all pages
   contact: {
     email: 'info@example.com',
-    phone: '+1 (555) 123-4567', // Optional
+    phone: '+1 (555) 123-4567', // Optional - leave empty string '' to hide
     hours: 'Mon–Sun · 9–5'
   },
 
-  // Social Media Links (add or remove as needed)
+  // Social Media Links
+  // IMPORTANT: Add or remove social platforms as needed. Set to empty string '' or remove to hide
   social: {
-    facebook: 'https://facebook.com/oss',
-    twitter: 'https://twitter.com/oss',
-    instagram: 'https://instagram.com/oss',
-    youtube: 'https://youtube.com/@oss'
+    facebook: '', // 'https://facebook.com/oss'
+    twitter: '', // 'https://twitter.com/oss'
+    instagram: '', // 'https://instagram.com/oss'
+    youtube: '', // 'https://youtube.com/@oss'
+    discord: '', // 'https://discord.gg/oss'
+    twitch: '' // 'https://twitch.tv/oss'
   },
 
   // Branding
