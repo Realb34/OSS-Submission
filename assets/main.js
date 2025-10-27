@@ -250,13 +250,14 @@ function initDropdowns() {
         if (isMobile()) menu.style.display = 'none';
       } else {
         // Add delay before closing to prevent accidental dismissal
+        // Increased from 300ms to 500ms for better user experience
         closeTimeout = setTimeout(() => {
           drop.classList.remove('open');
           drop.setAttribute('aria-expanded', 'false');
           btn.setAttribute('aria-expanded', 'false');
           menu.classList.remove('show');
           closeTimeout = null;
-        }, 300);
+        }, 500);
       }
     }
 
